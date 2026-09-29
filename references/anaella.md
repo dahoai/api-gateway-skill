@@ -1,6 +1,6 @@
 # Anaella
 
-Last checked: 2026-09-29, from the provider definition only; the endpoint list is not known and nothing has been run against the live gateway.
+Last checked: 2026-09-29, from the provider definition and one call through the live gateway (`GET /anaella/` answers 200 `{"status":"ok","name":"anaella.com API"}`); the rest of the endpoint list is not known.
 
 ## App key
 
@@ -8,7 +8,7 @@ Last checked: 2026-09-29, from the provider definition only; the endpoint list i
 
 ## Reads
 
-No endpoint is confirmed here. Read Anaella's own API documentation before calling anything, start with a small `GET`, and do not guess paths. Anaella is a social scheduling tool, so read calls are likely to list channels and posts.
+Only the root is confirmed: `GET https://gateway.daho.ai/anaella/` returns `{"status":"ok","name":"anaella.com API"}`, a quick check that the connection works. For anything else, read Anaella's own API documentation before calling anything, start with a small `GET`, and do not guess paths. Anaella is a social scheduling tool, so read calls are likely to list channels and posts.
 
 ## Writes and risks
 

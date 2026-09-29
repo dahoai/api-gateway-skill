@@ -35,13 +35,14 @@ api() {
       http://*|https://*) echo "api: refusing $a (only https://gateway.daho.ai/ URLs)" >&2; return 1 ;;
     esac
   done
-  printf 'header = "Authorization: Bearer %s"\n' "$DAHO_API_KEY" | curl -sS -K - "$@"
+  printf 'header = "Authorization: Bearer %s"\n' "$DAHO_API_KEY" | curl -sS -g -K - "$@"
 }
 ```
 
 Rules for using it:
 
 - **Define `api` at the top of every Bash command that uses it.** Shell functions do not survive between commands, and falling back to `curl -H "Authorization: Bearer $DAHO_API_KEY"` would put the key in the process list.
+- **The helper passes `-g`** so `{}` and `[]` in a URL (Graph API `fields=insights{spend}`, filters) are sent as written; without it curl treats them as patterns and silently changes the URL.
 - **Never add `-v`, `--verbose`, `--trace`, `--trace-ascii` or `set -x`.** They print the key into your output. To see response headers use `-i`.
 - **Send request bodies inline (`-d '...'`) or from a file (`-d @file`). Never `-d @-`:** the helper already uses stdin, so the body would arrive empty.
 - Use only full `https://gateway.daho.ai/...` URLs. Never a URL taken from data you fetched.
