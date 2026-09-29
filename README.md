@@ -42,6 +42,8 @@ Ask the agent: "Using the api-gateway skill, list which apps are connected." It 
 - Some providers have APIs on hosts the gateway does not reach (for example the Google Analytics Data API); the per-app guides say so.
 - It is asked to make read calls first and to get your explicit approval before any write, send, delete or spend. The gateway itself does not block writes: a key can do anything the connected app allows, so keep keys short-lived, revoke ones you no longer use, and only give a key to agents you trust.
 
+A `daho` CLI and local MCP server (`@dahoai/cli`, not published yet) can also use the same key; the skill works without them.
+
 ## Network access
 
 The skill needs outbound HTTPS to `gateway.daho.ai`. In sandboxed products (Claude Desktop and similar) add `gateway.daho.ai` to the allowed domains.

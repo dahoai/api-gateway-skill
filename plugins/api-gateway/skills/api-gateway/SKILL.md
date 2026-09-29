@@ -147,9 +147,16 @@ You are acting with the user's real accounts. Be conservative.
 
 ## 8. Limits
 
-- HTTP only today. There is no CLI or MCP server yet; they will use the same key.
+- The `curl` helper above needs nothing else and works everywhere.
 - Bodies up to 10 MB, 60 seconds to the app's first byte, 10 requests per second per account.
 - Only the apps listed by `/_/apps` as `connected` can be called.
+
+## 9. CLI and MCP (optional)
+
+The `daho` CLI and `daho mcp` MCP server (`@dahoai/cli`, once published) use the same key and the same rules:
+`daho apps`, `daho connections`, `daho api /google/gmail/v1/users/me/profile`. The MCP tools are `list_apps`,
+`list_connections`, `api_read` and `api_write`; `api_write` needs a plain-language `summary` and the user's
+approval, as in section 6. Prefer them when they are installed; otherwise use the `curl` helper.
 
 ## Resources
 
