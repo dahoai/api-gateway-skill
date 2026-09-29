@@ -16,7 +16,7 @@ api "https://gateway.daho.ai/openai/v1/fine_tuning/jobs?limit=5"
 
 ## Writes and risks
 
-- Generation calls (`/v1/responses`, `/v1/chat/completions`, `/v1/embeddings`, `/v1/images/...`, `/v1/audio/...`) **cost money on the user's OpenAI account** and can be large. Tell the user what you will call and roughly how much before sending many of them.
+- Generation calls (`/v1/responses`, `/v1/chat/completions`, `/v1/embeddings`, `/v1/images/...`, `/v1/audio/...`) **cost money on the user's OpenAI account**, even a single one, and can be large. Ask before the first one, saying what you will call and roughly what it costs, and ask again before sending many.
 - Fine-tuning, file upload and deletion calls create billable jobs or remove data.
 
 ## Notes

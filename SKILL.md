@@ -91,7 +91,7 @@ print(json.dumps(json.load(urllib.request.urlopen(req)), indent=2))
 What the gateway does for you and what it does not:
 
 - It injects the app's credentials and any connection-level headers. Do not send `Authorization` for the app, and do not send headers the references say are injected (for example Google Ads `developer-token`).
-- Your own headers (for example `Content-Type`, `Accept`, a provider version header) are forwarded, except `Host`, `Authorization`, cookies and hop-by-hop headers.
+- Your own headers (for example `Content-Type`, `Accept`, a provider version header) are forwarded, except `Host`, `Authorization`, cookies, hop-by-hop headers, headers added by proxies and CDNs, and the gateway's own control headers (such as `DAHO-Connection`, which it reads itself).
 - Each app has one fixed host. APIs of that provider on a different host are not reachable through the gateway (the references say which).
 - The gateway only forwards. What an app lets the user do also depends on the permissions (scopes) the user granted when connecting it; a provider `403` usually means a missing scope.
 
@@ -106,7 +106,8 @@ Error bodies look like `{"error":{"code":"...","message":"...","details":{}}}`.
 | Status and code | Meaning | What to do |
 |---|---|---|
 | 401 `invalid_key` | key missing, wrong, revoked or expired | Stop. Tell the user; do not retry. |
-| 400 `invalid_path` | the path or query is not allowed | Fix the request. Do not put `${` in a path or query; do not use `..`, `//` or backslashes. |
+| 400 `invalid_path` | the path or query is not allowed | Fix the request. Do not put `${` in a path or query; do not use `.` or `..` segments, a leading `//`, backslashes or control characters. |
+| 404 `unknown_route` | you called a `/_/...` path that does not exist | Use only `/_/apps` and `/_/connections`. |
 | 404 `not_connected` | the app exists but the user has not connected it | Tell the user to connect it in the DAHO portal. You cannot connect apps. |
 | 404 `unknown_app` | no such app | Re-read `/_/apps` and use an `app` value from it. |
 | 404 `connection_not_found` | that `DAHO-Connection` id is not the user's | Re-read `/_/connections`. |
@@ -114,6 +115,7 @@ Error bodies look like `{"error":{"code":"...","message":"...","details":{}}}`.
 | 408 `body_timeout` | the request body arrived too slowly | Retry once. |
 | 413 `body_too_large` | body over 10 MB | Send less, or in parts. |
 | 429 `rate_limited` | over the limit (10 requests per second, and a cap on requests in flight) | Wait the `Retry-After` seconds, then slow down. Do not hammer. |
+| 500 `internal` | an unexpected gateway error | Retry a read once. For a write, check state first (section 7), then report. |
 | 502 `nango_unreachable` / `nango_error` | the connection service failed (it may have failed after forwarding your request) | For a read, retry once after a few seconds. For a write, do not retry: first check with a read whether it already happened (section 7), then report. |
 | 504 `upstream_timeout` | the app did not answer within 60 s | For a read, retry once. For a write, do not retry: first check whether it happened (section 7). |
 | any other status | the app's own error, passed through unchanged | Read the app's error message; it usually names the fix (scope, quota, bad id). |
@@ -125,7 +127,7 @@ You are acting with the user's real accounts. Be conservative.
 - **Read first.** Use `GET` and other read calls to learn identifiers and current state before you propose any change.
 - **Writes need explicit approval.** Before any `POST`, `PUT`, `PATCH` or `DELETE` that changes something, tell the user the app, the exact resource, the payload and the effect, and wait for a clear yes. A search or query that happens to use `POST` (for example Google Ads `googleAds:search`, HubSpot `/search`) is a read, but say so.
 - **High-impact actions need extra care and their own approval**, naming the specific target:
-  - sending email or messages to people outside the user's team (cost and reputation);
+  - sending email or messages to other people (cost and reputation);
   - publishing posts or changing ads, budgets or bids (public exposure, spend);
   - refunds, charges, payouts, subscription or plan changes (money);
   - deleting records, files, contacts or accounts (data loss);

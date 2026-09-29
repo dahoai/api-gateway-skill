@@ -10,7 +10,7 @@ Last checked: 2026-09-29, from the provider definition and Resend's API docs; no
 
 ```bash
 api https://gateway.daho.ai/resend/domains
-api https://gateway.daho.ai/resend/audiences
+api https://gateway.daho.ai/resend/audiences   # newer Resend versions may call these segments; check Resend's docs if this 404s
 api https://gateway.daho.ai/resend/emails/EMAIL_ID
 ```
 

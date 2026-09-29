@@ -35,8 +35,9 @@ check_links() {
     done
 }
 BROKEN=$(
-    check_links "$SKILL"
-    [ -f "$ROOT/references/README.md" ] && check_links "$ROOT/references/README.md"
+    for f in "$SKILL" "$ROOT/README.md" "$ROOT"/references/*.md; do
+        [ -f "$f" ] && check_links "$f"
+    done
 )
 if [ -n "$BROKEN" ]; then
     printf 'FAIL: broken links:\n%s\n' "$BROKEN"
@@ -66,6 +67,11 @@ if grep -rEq 'daho_live_[A-Za-z0-9_-]{43}' "$ROOT" --exclude-dir=.git; then
 fi
 
 # 6. the plugin copy matches the source
+# other common secret shapes (Stripe, OpenAI-style, Resend, GitHub, AWS, Slack); short '...' placeholders do not match
+if grep -rEq 'sk_(live|test)_[A-Za-z0-9]{16,}|sk-[A-Za-z0-9_-]{20,}|re_[A-Za-z0-9_]{20,}|gh[pousr]_[A-Za-z0-9]{30,}|AKIA[0-9A-Z]{16}|xox[baprs]-[A-Za-z0-9-]{10,}' "$ROOT" --exclude-dir=.git; then
+    err "a string shaped like a provider secret or token is committed"
+fi
+
 COPY="$ROOT/plugins/api-gateway/skills/api-gateway"
 if [ -f "$ROOT/.claude-plugin/marketplace.json" ] && [ ! -d "$COPY" ]; then
     err "the marketplace lists a plugin but its copy is missing (run scripts/build-plugin.sh)"

@@ -80,6 +80,16 @@ make_good "$D"; mkdir -p "$D/tests"; printf 'daho_live_%s\n' "$(printf 'B%.0s' $
 # a plugin marketplace with no plugin copy must fail, not pass silently
 make_good "$D"; mkdir -p "$D/.claude-plugin"; echo '{}' > "$D/.claude-plugin/marketplace.json"; expect "marketplace without a plugin copy" "$D" 1 "copy is missing"
 
+# other common secret shapes are caught too, but short placeholders are not
+make_good "$D"; printf 'k: sk_live_%s\n' "$(printf 'a%.0s' $(seq 1 24))" >> "$D/references/slack.md"; expect "a Stripe-style live key" "$D" 1 "secret"
+make_good "$D"; printf 'k: re_%s\n' "$(printf 'b%.0s' $(seq 1 30))" >> "$D/references/slack.md"; expect "a Resend-style key" "$D" 1 "secret"
+make_good "$D"; printf 'k: ghp_%s\n' "$(printf 'c%.0s' $(seq 1 36))" >> "$D/references/slack.md"; expect "a GitHub token" "$D" 1 "secret"
+make_good "$D"; printf 'use sk_live_... or re_... or sk-... as placeholders\n' >> "$D/references/slack.md"; expect "short placeholders are allowed" "$D" 0
+
+# links are checked in every guide and in the top-level README, not just SKILL.md and the index
+make_good "$D"; echo '[gone](nope.md)' >> "$D/references/slack.md"; expect "broken link inside a guide" "$D" 1 "broken links"
+make_good "$D"; echo '[gone](docs/nope.md)' > "$D/README.md"; expect "broken link in the top-level README" "$D" 1 "broken links"
+
 # an empty references/ folder must give the one clear error, not noise from an unmatched glob
 make_good "$D"; rm -f "$D/references/README.md" "$D/references/slack.md"
 out=$("$VALIDATE" "$D" 2>&1); code=$?
