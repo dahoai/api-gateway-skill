@@ -74,6 +74,15 @@ echo "extra" >> "$D/SKILL.md"; expect "plugin SKILL.md drift" "$D" 1 "differs fr
 make_good "$D"; mkdir -p "$D/plugins/api-gateway/skills/api-gateway"; cp -R "$D/SKILL.md" "$D/references" "$D/plugins/api-gateway/skills/api-gateway/"
 echo "extra" >> "$D/references/slack.md"; expect "plugin references drift" "$D" 1 "references differ"
 
+# an empty references/ folder must give the one clear error, not noise from an unmatched glob
+make_good "$D"; rm -f "$D/references/README.md" "$D/references/slack.md"
+out=$("$VALIDATE" "$D" 2>&1); code=$?
+if [ "$code" -eq 1 ] && printf '%s' "$out" | grep -q "the index) is missing" && ! printf '%s' "$out" | grep -q 'references/\*\.md'; then
+    pass=$((pass + 1)); echo "ok   empty references folder gives one clear error"
+else
+    failed=$((failed + 1)); echo "FAIL empty references folder gives one clear error (exit $code)"; printf '%s\n' "$out" | sed 's/^/     /'
+fi
+
 echo
 echo "$pass passed, $failed failed"
 [ "$failed" -eq 0 ]

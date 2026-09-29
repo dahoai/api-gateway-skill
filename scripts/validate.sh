@@ -48,6 +48,7 @@ REFS="$ROOT/references"
 if [ -d "$REFS" ]; then
     [ -f "$REFS/README.md" ] || err "references/README.md (the index) is missing"
     for f in "$REFS"/*.md; do
+        [ -e "$f" ] || continue # no guides at all: the missing index is already reported
         name=$(basename "$f")
         [ "$name" = README.md ] && continue
         grep -q "($name)" "$REFS/README.md" 2>/dev/null || err "references/$name is not listed in references/README.md"
