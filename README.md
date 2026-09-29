@@ -12,18 +12,24 @@ Let an AI agent use the apps you have connected in DAHO (Gmail, Google Ads, HubS
 export DAHO_API_KEY="daho_live_..."
 ```
 
-## Install (from a local clone)
+## Install
 
 **Claude Code**
 
 ```bash
-claude plugin marketplace add /path/to/api-gateway-skill
+claude plugin marketplace add dahoai/api-gateway-skill
 claude plugin install api-gateway@daho-plugins
 ```
 
-**Any agent that supports `SKILL.md` skills:** copy `SKILL.md` and the `references/` folder into the agent's skills directory as `api-gateway/`.
+**Agents that support the Skills CLI** (Claude Code, Cursor, Codex and others):
 
-Once this repository is published, replace the path with its GitHub `owner/repo` and add `npx skills add owner/repo`. (Publishing is a separate, deliberate step: nothing here is published yet.)
+```bash
+npx skills add dahoai/api-gateway-skill
+```
+
+**Any other agent that reads `SKILL.md` skills:** copy `SKILL.md` and the `references/` folder into the agent's skills directory as `api-gateway/`.
+
+From a local clone, use the clone's path instead of `dahoai/api-gateway-skill` in the Claude Code commands.
 
 ## Try it
 
