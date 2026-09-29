@@ -1,0 +1,11 @@
+{
+    "name": "daho-plugins",
+    "owner": { "name": "DAHO" },
+    "plugins": [
+        {
+            "name": "api-gateway",
+            "source": "./plugins/api-gateway",
+            "description": "Use the apps a DAHO client has connected through the DAHO API gateway, safely and with one API key."
+        }
+    ]
+}
