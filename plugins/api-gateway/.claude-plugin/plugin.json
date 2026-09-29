@@ -1,6 +1,6 @@
 {
     "name": "api-gateway",
-    "description": "Use the apps a DAHO client has connected (Gmail, Google Ads, HubSpot, Stripe and more) through the DAHO API gateway, safely and with one API key.",
+    "description": "Use the apps a DadConnect user has connected (Gmail, Google Ads, HubSpot, Stripe and more) through the DadConnect API gateway, safely and with one API key.",
     "version": "1.0.0",
     "author": { "name": "DAHO" }
 }

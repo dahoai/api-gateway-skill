@@ -4,7 +4,7 @@ Last checked: 2026-09-29, from the provider definition and Apify's API docs; not
 
 ## App key
 
-`apify`. Host: `https://api.apify.com`. DAHO injects `Authorization: Bearer <the stored Apify token>`. **Do not send an Authorization header.**
+`apify`. Host: `https://api.apify.com`. DadConnect injects `Authorization: Bearer <the stored Apify token>`. **Do not send an Authorization header.**
 
 ## Reads
 

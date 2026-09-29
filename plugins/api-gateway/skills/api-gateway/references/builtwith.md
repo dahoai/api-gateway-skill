@@ -4,7 +4,7 @@ Last checked: 2026-09-29, from the provider definition only; the request path an
 
 ## App key
 
-`builtwith`. Host: `https://api.builtwith.com`. DAHO adds the account's `KEY=` query parameter automatically. **Do not send a key yourself.**
+`builtwith`. Host: `https://api.builtwith.com`. DadConnect adds the account's `KEY=` query parameter automatically. **Do not send a key yourself.**
 
 ## Reads
 

@@ -4,7 +4,7 @@ Last checked: 2026-09-29, from the provider definition and OpenAI's API docs; no
 
 ## App key
 
-`openai-admin`. Host: `https://api.openai.com`. DAHO injects the stored **admin** key. This key can manage the whole organization, so use it only for the exact task and never print anything that looks like a key.
+`openai-admin`. Host: `https://api.openai.com`. DadConnect injects the stored **admin** key. This key can manage the whole organization, so use it only for the exact task and never print anything that looks like a key.
 
 ## Reads
 

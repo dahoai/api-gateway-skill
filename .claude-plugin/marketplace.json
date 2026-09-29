@@ -7,8 +7,8 @@
         {
             "name": "api-gateway",
             "source": "./plugins/api-gateway",
-            "description": "Use the apps a DAHO client has connected through the DAHO API gateway, safely and with one API key."
+            "description": "Use the apps a DadConnect user has connected through the DadConnect API gateway, safely and with one API key."
         }
     ],
-    "description": "Skills for using the apps a DAHO client has connected through the DAHO API gateway."
+    "description": "Skills for using the apps a DadConnect user has connected through the DadConnect API gateway."
 }

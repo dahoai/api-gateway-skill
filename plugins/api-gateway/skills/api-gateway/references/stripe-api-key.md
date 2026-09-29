@@ -4,7 +4,7 @@ Last checked: 2026-09-29, from the provider definition and Stripe's API docs; no
 
 ## App key
 
-`stripe-api-key`. Host: `https://api.stripe.com`. Auth is the stored Stripe key. DAHO injects the `stripe-context` header from the connection's settings: **do not send it yourself.**
+`stripe-api-key`. Host: `https://api.stripe.com`. Auth is the stored Stripe key. DadConnect injects the `stripe-context` header from the connection's settings: **do not send it yourself.**
 
 ## Reads
 

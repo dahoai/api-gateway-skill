@@ -4,7 +4,7 @@ Last checked: 2026-09-29, from the provider definition and OpenAI's API docs; no
 
 ## App key
 
-`openai`. Host: `https://api.openai.com`. DAHO injects `Authorization: Bearer <the user's stored OpenAI key>` and a JSON content type. **Do not send an Authorization header for OpenAI.**
+`openai`. Host: `https://api.openai.com`. DadConnect injects `Authorization: Bearer <the user's stored OpenAI key>` and a JSON content type. **Do not send an Authorization header for OpenAI.**
 
 ## Reads
 

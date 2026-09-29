@@ -1,10 +1,10 @@
-# DAHO API Gateway skill
+# DadConnect API gateway skill
 
-Let an AI agent use the apps you have connected in DAHO (Gmail, Google Ads, HubSpot, Stripe, Resend and more) with one API key and plain HTTP. The skill teaches the agent to discover what is connected, call it, and stay safe: read first, ask before writing, never expose the key.
+Let an AI agent use the apps you have connected in DadConnect (Gmail, Google Ads, HubSpot, Stripe, Resend and more) with one API key and plain HTTP. The skill teaches the agent to discover what is connected, call it, and stay safe: read first, ask before writing, never expose the key.
 
 ## What you need
 
-1. A DAHO account with your apps connected in the portal: https://portal.auth.daho.ai
+1. A DadConnect account (by DAHO) with your apps connected: https://connect.daho.ai
 2. An API key: portal, **API keys**, **Create key**. Copy it once (it is shown only once).
 3. The key in the agent's environment, not in the chat. Typing `export DAHO_API_KEY=...` puts it in your shell history, so read it silently instead (or use a secrets manager):
 

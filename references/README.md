@@ -1,6 +1,6 @@
 # Per-app guides
 
-One page per app DAHO has configured. The `app` value in the URL is the integration key shown in `GET /_/apps`. Every page says when it was last checked and against what; until the user's live smoke test passes, none of them has been run against the live gateway, so treat examples as starting points and confirm with a small read call first.
+One page per app DadConnect has configured. The `app` value in the URL is the integration key shown in `GET /_/apps`. Every page says when it was last checked and against what; until the user's live smoke test passes, none of them has been run against the live gateway, so treat examples as starting points and confirm with a small read call first.
 
 If an app has no page, read the provider's official API docs and start with read calls.
 

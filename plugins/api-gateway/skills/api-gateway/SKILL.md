@@ -1,9 +1,9 @@
 ---
 name: api-gateway
 description: |
-  Call the third-party apps a DAHO client has connected (Gmail, Google Ads, HubSpot, Stripe, Resend and more) through the DAHO API gateway, which injects the client's stored credentials.
+  Call the third-party apps a DadConnect user has connected (Gmail, Google Ads, HubSpot, Stripe, Resend and more) through the DadConnect API gateway, which injects the client's stored credentials.
   Use this skill when the user names a connected app and a concrete action in it: read an inbox, query ad campaigns, list CRM contacts, check a Stripe balance, look up a domain.
-  It is not a general web or network client. It only reaches apps the user connected in the DAHO portal, and it cannot connect apps for them.
+  It is not a general web or network client. It only reaches apps the user connected in DadConnect, and it cannot connect apps for them.
   Default to read and list calls. Every write, send, delete or spend needs the user's explicit approval first.
 allowed-tools: Bash, Read, Grep, Glob
 compatibility: Requires network access to gateway.daho.ai and a DAHO API key in the DAHO_API_KEY environment variable
@@ -12,15 +12,15 @@ metadata:
   version: "1.0"
 ---
 
-# DAHO API Gateway
+# DadConnect API Gateway
 
-One API key, plain HTTP. The gateway forwards your call to the app's own API using the credentials the user already connected in the DAHO portal, so you never handle OAuth or app secrets.
+One API key, plain HTTP. The gateway forwards your call to the app's own API using the credentials the user already connected in DadConnect, so you never handle OAuth or app secrets.
 
 Base URL: `https://gateway.daho.ai`
 
 ## 1. Setup
 
-The user creates a key in the DAHO portal (API keys page) and puts it in the environment as `DAHO_API_KEY`.
+The user creates a key in DadConnect (API keys page) and puts it in the environment as `DAHO_API_KEY`.
 
 - Check that it is set without printing it: `[ -n "$DAHO_API_KEY" ] && echo set || echo "not set"`
 - If it is missing, stop and ask the user to set it. Never ask them to paste the key into the chat.
@@ -109,7 +109,7 @@ Error bodies look like `{"error":{"code":"...","message":"...","details":{}}}`.
 | 401 `invalid_key` | key missing, wrong, revoked or expired | Stop. Tell the user; do not retry. |
 | 400 `invalid_path` | the path or query is not allowed | Fix the request. Do not put `${` in a path or query; do not use `.` or `..` segments, a leading `//`, backslashes or control characters. |
 | 404 `unknown_route` | you called a `/_/...` path that does not exist | Use only `/_/apps` and `/_/connections`. |
-| 404 `not_connected` | the app exists but the user has not connected it | Tell the user to connect it in the DAHO portal. You cannot connect apps. |
+| 404 `not_connected` | the app exists but the user has not connected it | Tell the user to connect it in DadConnect. You cannot connect apps. |
 | 404 `unknown_app` | no such app | Re-read `/_/apps` and use an `app` value from it. |
 | 404 `connection_not_found` | that `DAHO-Connection` id is not the user's | Re-read `/_/connections`. |
 | 409 `connection_required` | several connections | Ask the user which (section 4). |
@@ -162,4 +162,4 @@ approval, as in section 6. Prefer them when they are installed; otherwise use th
 ## Resources
 
 - [Per-app guides](references/README.md)
-- DAHO portal: `https://portal.auth.daho.ai` (create keys, connect apps)
+- DadConnect: `https://connect.daho.ai` (create keys, connect apps)

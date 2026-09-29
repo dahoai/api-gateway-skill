@@ -4,7 +4,7 @@ Last checked: 2026-09-29, from the provider definition and Resend's API docs; no
 
 ## App key
 
-`resend`. Host: `https://api.resend.com`. DAHO injects `Authorization: Bearer <the stored Resend key>`. **Do not send an Authorization header.**
+`resend`. Host: `https://api.resend.com`. DadConnect injects `Authorization: Bearer <the stored Resend key>`. **Do not send an Authorization header.**
 
 ## Reads
 

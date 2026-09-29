@@ -6,7 +6,7 @@ Last checked: 2026-09-29, from the provider definition and Google's API docs; no
 
 `google-ads`. Host: `https://googleads.googleapis.com`.
 
-DAHO injects the `developer-token` and `login-customer-id` headers from the connection's settings. **Do not send them yourself.**
+DadConnect injects the `developer-token` and `login-customer-id` headers from the connection's settings. **Do not send them yourself.**
 
 ## Reads
 
