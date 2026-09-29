@@ -22,7 +22,7 @@ api -X POST -H 'Content-Type: application/json' \
 
 ## Writes and risks
 
-- `POST`/`PATCH` on `/crm/v3/objects/...` creates or edits contacts, companies and deals; `DELETE` removes them (deleted records can be restored only for a limited time).
+- `POST`/`PATCH` on `/crm/v3/objects/...` creates or edits contacts, companies and deals; `DELETE` archives them (archived records can be restored only for a limited time). Merge endpoints (`.../merge`) and `.../gdpr-delete` are **permanent**.
 - Batch endpoints (`/batch/create`, `/batch/update`, `/batch/archive`) change many records at once.
 - Marketing email and workflow endpoints (`/marketing/...`, `/automation/...`) can send messages to real contacts or enroll them in automations.
 

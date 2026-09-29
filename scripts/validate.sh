@@ -60,12 +60,16 @@ if [ -d "$REFS" ]; then
 fi
 
 # 5. no key-shaped secrets ('daho_live_...' with three dots is the allowed placeholder)
-if grep -rEq 'daho_live_[A-Za-z0-9_-]{43}' "$ROOT" --exclude-dir=.git --exclude-dir=tests; then
+# (tests/ is scanned too: the tests build their fake key at run time, so no literal key is ever committed there)
+if grep -rEq 'daho_live_[A-Za-z0-9_-]{43}' "$ROOT" --exclude-dir=.git; then
     err "a string shaped like a DAHO API key is committed"
 fi
 
 # 6. the plugin copy matches the source
 COPY="$ROOT/plugins/api-gateway/skills/api-gateway"
+if [ -f "$ROOT/.claude-plugin/marketplace.json" ] && [ ! -d "$COPY" ]; then
+    err "the marketplace lists a plugin but its copy is missing (run scripts/build-plugin.sh)"
+fi
 if [ -d "$COPY" ]; then
     diff -q "$SKILL" "$COPY/SKILL.md" > /dev/null 2>&1 || err "plugins/api-gateway/skills/api-gateway/SKILL.md differs from SKILL.md (run scripts/build-plugin.sh)"
     if [ -d "$REFS" ]; then

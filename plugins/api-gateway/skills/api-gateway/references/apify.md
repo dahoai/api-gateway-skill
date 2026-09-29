@@ -17,7 +17,7 @@ api "https://gateway.daho.ai/apify/v2/datasets/DATASET_ID/items?limit=10"
 
 ## Writes and risks
 
-- `POST /v2/acts/{actorId}/runs` starts an actor run. **Runs consume the user's Apify credits** and can run for a long time.
+- `POST /v2/acts/{actorId}/runs` starts an actor run. **Runs consume the user's Apify credits** and can run for a long time. So do `POST /v2/acts/{actorId}/run-sync` and `.../run-sync-get-dataset-items` (a read-looking POST that runs the actor and spends credits) and `POST /v2/actor-tasks/{taskId}/runs`.
 - `DELETE` on actors, tasks, datasets or stores removes data. Changing schedules or webhooks creates ongoing automatic activity.
 
 Get the user's explicit approval before starting any run, naming the actor and the input.

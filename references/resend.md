@@ -17,6 +17,7 @@ api https://gateway.daho.ai/resend/emails/EMAIL_ID
 ## Writes and risks
 
 - `POST /emails` and `POST /emails/batch` **send real email to real recipients** from the user's verified domain. Cost and sender reputation are at stake, and a sent email cannot be recalled. Show the user the exact recipients, subject and body, and get a clear yes for each send.
+- Broadcasts (`POST /broadcasts/{id}/send`) send one email to an entire audience at once: the highest-impact call in this app. It needs the user's explicit approval naming the audience and the content.
 - Creating or deleting domains, API keys, audiences and contacts changes the account.
 
 ## Notes

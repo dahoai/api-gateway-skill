@@ -22,12 +22,14 @@ This app moves money. Every write needs the user's explicit approval naming the 
 
 - refunds (`POST /v1/refunds`), charges and payment intents, payouts (`POST /v1/payouts`);
 - creating, changing or cancelling subscriptions; deleting customers, coupons or products;
-- creating invoices and sending them to customers.
+- creating, finalizing, paying (`POST /v1/invoices/{id}/pay`) and sending invoices to customers;
+- capturing a charge (`POST /v1/charges/{id}/capture`), creating transfers (`POST /v1/transfers`, relevant with connected accounts), and closing or answering disputes.
 
-Prefer test-mode data when the user says the key is a test key. Do not retry a failed payment call before checking the current state with a read.
+The key decides the mode: if it is a live key, every write moves real money, so say so when you ask for approval. Do not retry a failed payment call before checking the current state with a read.
 
 ## Notes
 
 - `POST` bodies are form-encoded: send `Content-Type: application/x-www-form-urlencoded` with `key=value&...`, not JSON.
 - Pagination: `has_more` is true when there is another page; pass the last object's id as `starting_after`.
 - Amounts are in the smallest currency unit (cents), so 1999 is 19.99.
+- **Send a fresh `Idempotency-Key` header (any unique string) with every `POST`.** Stripe then returns the original result if the same request is repeated, so a retry after a 502 or a timeout cannot charge, refund or pay out twice. Still check state with a read before retrying a write.

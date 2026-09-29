@@ -24,6 +24,6 @@ Get the user's explicit approval with the exact content, Page and budget.
 
 ## Notes
 
-- **Page access tokens are credentials.** If a response contains an `access_token`, never print, log or store it. Do not ask for the `access_token` field unless a specific Page endpoint requires it, and use it only for the current task.
-- Many Page endpoints need a Page token and specific permissions; a `(#200)` or `(#10)` error means the permission is missing.
+- **Page access tokens are credentials, and Page-token endpoints are not supported through the gateway.** The gateway does not forward your `Authorization` header, so the only way to use a Page token would be putting it in the URL (`?access_token=`), which breaks the no-secrets-in-URLs rule. Never request the `access_token` field, and if a response contains one, do not print, store or use it.
+- Because of that, most Page publishing and Page-insight calls will fail with a permission error (`(#200)` or `(#10)`) through the gateway. Tell the user rather than working around it.
 - Pagination: `paging.cursors.after`, or follow `paging.next`.

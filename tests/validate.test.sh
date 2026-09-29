@@ -74,6 +74,12 @@ echo "extra" >> "$D/SKILL.md"; expect "plugin SKILL.md drift" "$D" 1 "differs fr
 make_good "$D"; mkdir -p "$D/plugins/api-gateway/skills/api-gateway"; cp -R "$D/SKILL.md" "$D/references" "$D/plugins/api-gateway/skills/api-gateway/"
 echo "extra" >> "$D/references/slack.md"; expect "plugin references drift" "$D" 1 "references differ"
 
+# a real-looking key must be caught even under tests/ (the exclusion was a bypass)
+make_good "$D"; mkdir -p "$D/tests"; printf 'daho_live_%s\n' "$(printf 'B%.0s' $(seq 1 43))" > "$D/tests/leak.txt"; expect "key-shaped secret under tests/" "$D" 1 "DAHO API key"
+
+# a plugin marketplace with no plugin copy must fail, not pass silently
+make_good "$D"; mkdir -p "$D/.claude-plugin"; echo '{}' > "$D/.claude-plugin/marketplace.json"; expect "marketplace without a plugin copy" "$D" 1 "copy is missing"
+
 # an empty references/ folder must give the one clear error, not noise from an unmatched glob
 make_good "$D"; rm -f "$D/references/README.md" "$D/references/slack.md"
 out=$("$VALIDATE" "$D" 2>&1); code=$?
