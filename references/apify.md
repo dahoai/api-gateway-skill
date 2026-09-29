@@ -9,10 +9,10 @@ Last checked: 2026-09-29, from the provider definition and Apify's API docs; not
 ## Reads
 
 ```bash
-api https://gateway.daho.ai/apify/v2/users/me
-api "https://gateway.daho.ai/apify/v2/acts?limit=5"
-api "https://gateway.daho.ai/apify/v2/actor-runs?limit=5&desc=1"
-api "https://gateway.daho.ai/apify/v2/datasets/DATASET_ID/items?limit=10"
+api https://connect-api.daho.ai/apify/v2/users/me
+api "https://connect-api.daho.ai/apify/v2/acts?limit=5"
+api "https://connect-api.daho.ai/apify/v2/actor-runs?limit=5&desc=1"
+api "https://connect-api.daho.ai/apify/v2/datasets/DATASET_ID/items?limit=10"
 ```
 
 ## Writes and risks

@@ -9,8 +9,8 @@ Last checked: 2026-09-29, from the provider definition and Meta's Graph API docs
 ## Reads
 
 ```bash
-api "https://gateway.daho.ai/facebook/me?fields=id,name"
-api "https://gateway.daho.ai/facebook/me/accounts?fields=id,name"
+api "https://connect-api.daho.ai/facebook/me?fields=id,name"
+api "https://connect-api.daho.ai/facebook/me/accounts?fields=id,name"
 ```
 
 `me/accounts` lists the Pages the user manages. Request only `id,name`: by default this call can also return Page access tokens.

@@ -9,9 +9,9 @@ Last checked: 2026-09-29, from the provider definition and OpenAI's API docs; no
 ## Reads
 
 ```bash
-api https://gateway.daho.ai/openai/v1/models
-api "https://gateway.daho.ai/openai/v1/files?limit=10"
-api "https://gateway.daho.ai/openai/v1/fine_tuning/jobs?limit=5"
+api https://connect-api.daho.ai/openai/v1/models
+api "https://connect-api.daho.ai/openai/v1/files?limit=10"
+api "https://connect-api.daho.ai/openai/v1/fine_tuning/jobs?limit=5"
 ```
 
 ## Writes and risks

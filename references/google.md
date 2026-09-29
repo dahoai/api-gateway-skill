@@ -9,13 +9,13 @@ Last checked: 2026-09-29, from the provider definition and Google's API docs; no
 ## Reads
 
 ```bash
-api https://gateway.daho.ai/google/gmail/v1/users/me/profile
-api "https://gateway.daho.ai/google/gmail/v1/users/me/messages?maxResults=5&q=is:unread"
-api "https://gateway.daho.ai/google/gmail/v1/users/me/messages/MESSAGE_ID?format=metadata&metadataHeaders=From&metadataHeaders=Subject&metadataHeaders=Date"
-api https://gateway.daho.ai/google/gmail/v1/users/me/labels
-api "https://gateway.daho.ai/google/drive/v3/files?pageSize=10&fields=files(id,name,mimeType,modifiedTime)"
-api https://gateway.daho.ai/google/calendar/v3/users/me/calendarList
-api "https://gateway.daho.ai/google/calendar/v3/calendars/primary/events?maxResults=10&singleEvents=true&orderBy=startTime&timeMin=2026-09-29T00:00:00Z"
+api https://connect-api.daho.ai/google/gmail/v1/users/me/profile
+api "https://connect-api.daho.ai/google/gmail/v1/users/me/messages?maxResults=5&q=is:unread"
+api "https://connect-api.daho.ai/google/gmail/v1/users/me/messages/MESSAGE_ID?format=metadata&metadataHeaders=From&metadataHeaders=Subject&metadataHeaders=Date"
+api https://connect-api.daho.ai/google/gmail/v1/users/me/labels
+api "https://connect-api.daho.ai/google/drive/v3/files?pageSize=10&fields=files(id,name,mimeType,modifiedTime)"
+api https://connect-api.daho.ai/google/calendar/v3/users/me/calendarList
+api "https://connect-api.daho.ai/google/calendar/v3/calendars/primary/events?maxResults=10&singleEvents=true&orderBy=startTime&timeMin=2026-09-29T00:00:00Z"
 ```
 
 - The messages list returns ids only; fetch each message for its content. Message bodies are base64url encoded.

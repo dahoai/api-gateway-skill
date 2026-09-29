@@ -9,11 +9,11 @@ Last checked: 2026-09-29, from the provider definition and Stripe's API docs; no
 ## Reads
 
 ```bash
-api https://gateway.daho.ai/stripe-api-key/v1/balance
-api "https://gateway.daho.ai/stripe-api-key/v1/customers?limit=5"
-api "https://gateway.daho.ai/stripe-api-key/v1/charges?limit=5"
-api "https://gateway.daho.ai/stripe-api-key/v1/subscriptions?limit=5&status=active"
-api "https://gateway.daho.ai/stripe-api-key/v1/invoices?limit=5"
+api https://connect-api.daho.ai/stripe-api-key/v1/balance
+api "https://connect-api.daho.ai/stripe-api-key/v1/customers?limit=5"
+api "https://connect-api.daho.ai/stripe-api-key/v1/charges?limit=5"
+api "https://connect-api.daho.ai/stripe-api-key/v1/subscriptions?limit=5&status=active"
+api "https://connect-api.daho.ai/stripe-api-key/v1/invoices?limit=5"
 ```
 
 ## Writes and risks

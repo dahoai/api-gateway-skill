@@ -10,15 +10,15 @@ Last checked: 2026-09-29, from the provider definition and Google's API docs; no
 
 ```bash
 # the sites the user can access
-api https://gateway.daho.ai/google-search-console/v3/sites
+api https://connect-api.daho.ai/google-search-console/v3/sites
 
 # search performance: top queries for a date range
 api -X POST -H 'Content-Type: application/json' \
   -d '{"startDate":"2026-09-01","endDate":"2026-09-28","dimensions":["query"],"rowLimit":10}' \
-  "https://gateway.daho.ai/google-search-console/v3/sites/https%3A%2F%2Fexample.com%2F/searchAnalytics/query"
+  "https://connect-api.daho.ai/google-search-console/v3/sites/https%3A%2F%2Fexample.com%2F/searchAnalytics/query"
 
 # submitted sitemaps
-api "https://gateway.daho.ai/google-search-console/v3/sites/https%3A%2F%2Fexample.com%2F/sitemaps"
+api "https://connect-api.daho.ai/google-search-console/v3/sites/https%3A%2F%2Fexample.com%2F/sitemaps"
 ```
 
 The `searchAnalytics/query` call is a `POST` but only reads data.

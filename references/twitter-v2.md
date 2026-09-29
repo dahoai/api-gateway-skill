@@ -9,9 +9,9 @@ Last checked: 2026-09-29, from the provider definition and X's API docs; not yet
 ## Reads
 
 ```bash
-api https://gateway.daho.ai/twitter-v2/2/users/me
-api "https://gateway.daho.ai/twitter-v2/2/users/USER_ID/tweets?max_results=5&tweet.fields=created_at,public_metrics"
-api "https://gateway.daho.ai/twitter-v2/2/tweets/search/recent?query=from%3Aexample&max_results=10"
+api https://connect-api.daho.ai/twitter-v2/2/users/me
+api "https://connect-api.daho.ai/twitter-v2/2/users/USER_ID/tweets?max_results=5&tweet.fields=created_at,public_metrics"
+api "https://connect-api.daho.ai/twitter-v2/2/tweets/search/recent?query=from%3Aexample&max_results=10"
 ```
 
 ## Writes and risks

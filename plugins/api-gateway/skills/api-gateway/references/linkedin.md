@@ -10,7 +10,7 @@ Last checked: 2026-09-29, from the provider definition and LinkedIn's API docs; 
 
 ```bash
 # the connected member's basic profile (needs the openid/profile scopes)
-api https://gateway.daho.ai/linkedin/v2/userinfo
+api https://connect-api.daho.ai/linkedin/v2/userinfo
 ```
 
 The versioned REST APIs (`/rest/...`) need two request headers that you must send yourself: `LinkedIn-Version: YYYYMM` (a current version from LinkedIn's docs) and `X-Restli-Protocol-Version: 2.0.0`. No other read example is confirmed here; use LinkedIn's docs and start with a small `GET`.

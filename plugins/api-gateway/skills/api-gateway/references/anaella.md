@@ -8,7 +8,7 @@ Last checked: 2026-09-29, from the provider definition and one call through the 
 
 ## Reads
 
-Only the root is confirmed: `GET https://gateway.daho.ai/anaella/` returns `{"status":"ok","name":"anaella.com API"}`, a quick check that the connection works. For anything else, read Anaella's own API documentation before calling anything, start with a small `GET`, and do not guess paths. Anaella is a social scheduling tool, so read calls are likely to list channels and posts.
+Only the root is confirmed: `GET https://connect-api.daho.ai/anaella/` returns `{"status":"ok","name":"anaella.com API"}`, a quick check that the connection works. For anything else, read Anaella's own API documentation before calling anything, start with a small `GET`, and do not guess paths. Anaella is a social scheduling tool, so read calls are likely to list channels and posts.
 
 ## Writes and risks
 

@@ -12,17 +12,17 @@ DadConnect injects the `developer-token` and `login-customer-id` headers from th
 
 ```bash
 # which customer accounts the user can access
-api https://gateway.daho.ai/google-ads/v20/customers:listAccessibleCustomers
+api https://connect-api.daho.ai/google-ads/v20/customers:listAccessibleCustomers
 
 # campaigns of one customer (a search query is a read even though it is a POST)
 api -X POST -H 'Content-Type: application/json' \
   -d '{"query":"SELECT campaign.id, campaign.name, campaign.status FROM campaign ORDER BY campaign.id LIMIT 20"}' \
-  https://gateway.daho.ai/google-ads/v20/customers/1234567890/googleAds:search
+  https://connect-api.daho.ai/google-ads/v20/customers/1234567890/googleAds:search
 
 # performance for the last 7 days
 api -X POST -H 'Content-Type: application/json' \
   -d '{"query":"SELECT campaign.name, metrics.impressions, metrics.clicks, metrics.cost_micros FROM campaign WHERE segments.date DURING LAST_7_DAYS"}' \
-  https://gateway.daho.ai/google-ads/v20/customers/1234567890/googleAds:search
+  https://connect-api.daho.ai/google-ads/v20/customers/1234567890/googleAds:search
 ```
 
 ## Writes and risks

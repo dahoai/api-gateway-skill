@@ -9,7 +9,7 @@ Last checked: 2026-09-29, from the provider definition; not yet run against the 
 ## Reads
 
 ```bash
-api https://gateway.daho.ai/google-my-business/v1/accounts
+api https://connect-api.daho.ai/google-my-business/v1/accounts
 ```
 
 ## Writes and risks

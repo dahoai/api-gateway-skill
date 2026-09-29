@@ -9,15 +9,15 @@ Last checked: 2026-09-29, from the provider definition and HubSpot's API docs; n
 ## Reads
 
 ```bash
-api https://gateway.daho.ai/hubspot/account-info/v3/details
-api "https://gateway.daho.ai/hubspot/crm/v3/objects/contacts?limit=5&properties=firstname,lastname,email"
-api "https://gateway.daho.ai/hubspot/crm/v3/objects/companies?limit=5&properties=name,domain"
-api "https://gateway.daho.ai/hubspot/crm/v3/objects/deals?limit=5&properties=dealname,amount,dealstage"
+api https://connect-api.daho.ai/hubspot/account-info/v3/details
+api "https://connect-api.daho.ai/hubspot/crm/v3/objects/contacts?limit=5&properties=firstname,lastname,email"
+api "https://connect-api.daho.ai/hubspot/crm/v3/objects/companies?limit=5&properties=name,domain"
+api "https://connect-api.daho.ai/hubspot/crm/v3/objects/deals?limit=5&properties=dealname,amount,dealstage"
 
 # search (a POST that only reads)
 api -X POST -H 'Content-Type: application/json' \
   -d '{"filterGroups":[{"filters":[{"propertyName":"email","operator":"EQ","value":"person@example.com"}]}],"properties":["firstname","lastname","email"]}' \
-  https://gateway.daho.ai/hubspot/crm/v3/objects/contacts/search
+  https://connect-api.daho.ai/hubspot/crm/v3/objects/contacts/search
 ```
 
 ## Writes and risks

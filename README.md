@@ -33,7 +33,7 @@ From a local clone, use the clone's path instead of `dahoai/api-gateway-skill` i
 
 ## Try it
 
-Ask the agent: "Using the api-gateway skill, list which apps are connected." It should call `GET https://gateway.daho.ai/_/apps` and report the result without printing your key.
+Ask the agent: "Using the api-gateway skill, list which apps are connected." It should call `GET https://connect-api.daho.ai/_/apps` and report the result without printing your key.
 
 ## What the agent can and cannot do
 
@@ -46,7 +46,7 @@ A `daho` CLI and local MCP server ([`@dahoai/cli`](https://github.com/dahoai/cli
 
 ## Network access
 
-The skill needs outbound HTTPS to `gateway.daho.ai`. In sandboxed products (Claude Desktop and similar) add `gateway.daho.ai` to the allowed domains.
+The skill needs outbound HTTPS to `connect-api.daho.ai`. In sandboxed products (Claude Desktop and similar) add `connect-api.daho.ai` to the allowed domains.
 
 ## For maintainers
 

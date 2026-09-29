@@ -10,11 +10,11 @@ Last checked: 2026-09-29, from the provider definition and OpenAI's API docs; no
 
 ```bash
 # cost per day (start_time is a unix timestamp in seconds)
-api "https://gateway.daho.ai/openai-admin/v1/organization/costs?start_time=1790000000&bucket_width=1d&limit=7"
+api "https://connect-api.daho.ai/openai-admin/v1/organization/costs?start_time=1790000000&bucket_width=1d&limit=7"
 # token usage
-api "https://gateway.daho.ai/openai-admin/v1/organization/usage/completions?start_time=1790000000&bucket_width=1d"
-api https://gateway.daho.ai/openai-admin/v1/organization/projects
-api https://gateway.daho.ai/openai-admin/v1/organization/users
+api "https://connect-api.daho.ai/openai-admin/v1/organization/usage/completions?start_time=1790000000&bucket_width=1d"
+api https://connect-api.daho.ai/openai-admin/v1/organization/projects
+api https://connect-api.daho.ai/openai-admin/v1/organization/users
 ```
 
 ## Writes and risks
