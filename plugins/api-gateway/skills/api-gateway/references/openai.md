@@ -1,6 +1,6 @@
 # OpenAI
 
-Last checked: 2026-09-29, from the provider definition and OpenAI's API docs; not yet run against the live gateway.
+Last checked: 2026-09-30, against the live gateway (GET /v1/models and GET /v1/models/gpt-4o-mini answered 200) and OpenAI's API docs.
 
 ## App key
 

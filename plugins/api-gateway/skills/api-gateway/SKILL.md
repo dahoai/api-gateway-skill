@@ -96,6 +96,11 @@ What the gateway does for you and what it does not:
 - Each app has one fixed host. APIs of that provider on a different host are not reachable through the gateway (the references say which).
 - The gateway only forwards. What an app lets the user do also depends on the permissions (scopes) the user granted when connecting it; a provider `403` usually means a missing scope.
 
+**Google apps and other Google hosts.** Each app has one default host. Google serves many APIs on their own hosts
+(`analyticsadmin.googleapis.com`, `mybusinessbusinessinformation.googleapis.com`, `gmail.googleapis.com`…). For a
+Google app only, add `-H 'DAHO-Host: <host>.googleapis.com'` to reach one of them; anything else is refused with
+`400 invalid_host`. See the app's guide for which host serves what.
+
 ## 4. Several connections for one app
 
 If the user connected two accounts of the same app, a call without a choice returns `409` with `error.code = "connection_required"` and the candidate ids in `error.details.connections`. Do not pick one. Ask the user which account, then repeat the call with the header `DAHO-Connection: <connection_id>`. Use `/_/connections` to show them what is connected.
@@ -107,6 +112,7 @@ Error bodies look like `{"error":{"code":"...","message":"...","details":{}}}`.
 | Status and code | Meaning | What to do |
 |---|---|---|
 | 401 `invalid_key` | key missing, wrong, revoked or expired | Stop. Tell the user; do not retry. |
+| 400 `invalid_host` | `DAHO-Host` was used on a non-Google app, or is not a `*.googleapis.com` host | Drop the header, or use the Google host named in the app's guide. |
 | 400 `invalid_path` | the path or query is not allowed | Fix the request. Do not put `${` in a path or query; do not use `.` or `..` segments, a leading `//`, backslashes or control characters. |
 | 404 `unknown_route` | you called a `/_/...` path that does not exist | Use only `/_/apps` and `/_/connections`. |
 | 404 `not_connected` | the app exists but the user has not connected it | Tell the user to connect it in DadConnect. You cannot connect apps. |

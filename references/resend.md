@@ -1,6 +1,6 @@
 # Resend
 
-Last checked: 2026-09-29, from the provider definition and Resend's API docs; not yet run against the live gateway.
+Last checked: 2026-09-30, against the live gateway (GET /domains and GET /api-keys answered 200) and Resend's API docs.
 
 ## App key
 

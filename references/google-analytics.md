@@ -1,22 +1,35 @@
 # Google Analytics
 
-Last checked: 2026-09-29, from the provider definition; not yet run against the live gateway.
+Last checked: 2026-09-30. Host routing checked against the live gateway (default host and `DAHO-Host`); the Google calls below are from Google's Analytics Data and Admin API docs and have not yet been run with a real Analytics connection.
 
 ## App key
 
-`google-analytics`. It is an alias of the `google` integration, so its host is `https://www.googleapis.com`.
+`google-analytics`. Default host: `https://analyticsdata.googleapis.com` (the Analytics Data API, for reports). Account and property lists live on `analyticsadmin.googleapis.com`: send `DAHO-Host: analyticsadmin.googleapis.com` to reach it. Auth is the user's Google OAuth grant; reading needs the `analytics.readonly` permission.
 
 ## Reads
 
-No supported read is known. Modern Google Analytics reporting (the Analytics Data API) and account settings (the Admin API) live on other hosts (`analyticsdata.googleapis.com`, `analyticsadmin.googleapis.com`), which the gateway cannot reach: each app has one fixed host, and overriding it is deliberately blocked.
+Find the property first (Admin API):
 
-If the user asks for Google Analytics data, tell them plainly that it is not available through the gateway yet, and that DAHO would need to add a host-specific integration. Do not try workarounds.
+```bash
+api -H 'DAHO-Host: analyticsadmin.googleapis.com' https://connect-api.daho.ai/google-analytics/v1beta/accountSummaries
+```
+
+Each `propertySummaries[].property` is an id like `properties/123456789`. Then run a report (Data API, the default host). `runReport` is a `POST` that only reads data. The rule that every `POST` needs the user's approval still applies: say what the report will fetch and ask once (through the MCP server it goes through `api_write`).
+
+```bash
+api -X POST -H 'Content-Type: application/json' \
+  https://connect-api.daho.ai/google-analytics/v1beta/properties/123456789:runReport \
+  -d '{"dateRanges":[{"startDate":"28daysAgo","endDate":"today"}],"dimensions":[{"name":"date"}],"metrics":[{"name":"activeUsers"},{"name":"sessions"}]}'
+```
+
+Useful metrics: `activeUsers`, `sessions`, `screenPageViews`, `conversions`, `totalRevenue`. Useful dimensions: `date`, `country`, `sessionSource`, `pagePath`, `deviceCategory`.
 
 ## Writes and risks
 
-None applicable.
+The Admin API can change properties, data streams and user access. Do not call any Admin API `POST`, `PATCH` or `DELETE` without the user's explicit approval.
 
 ## Notes
 
-- Search performance data is available through `google-search-console` instead.
-- Do not try the older `www.googleapis.com/analytics/...` endpoints without checking Google's docs; several are retired.
+- `DAHO-Host` only accepts `*.googleapis.com` hosts, and only for Google apps.
+- Search performance data comes from `google-search-console`, not here.
+- A `403` with `insufficientPermissions` means the connection lacks the Analytics permission: the user must reconnect and grant it.
